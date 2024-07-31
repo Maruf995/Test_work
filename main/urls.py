@@ -16,7 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from users.views import UserCreateView
+from article.views import PublicArticleListView, ArticleListView, ArticleDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    #users
+    path('api/v1/register/', UserCreateView.as_view(), name='register'),
+
+    #article
+    path('api/v1/articles/public/', PublicArticleListView.as_view(), name='public-articles'),
+    path('api/v1/articles/', ArticleListView.as_view(), name='articles'),
+    path('api/v1/articles/<int:pk>/', ArticleDetailView.as_view(), name='article-detail'),
+    
 ]
